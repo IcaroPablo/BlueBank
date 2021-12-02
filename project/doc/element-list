@@ -1,0 +1,10 @@
+com.bluebank.project
+com.bluebank.project.config
+com.bluebank.project.controllers
+com.bluebank.project.dtos
+com.bluebank.project.enums
+com.bluebank.project.exception
+com.bluebank.project.mappers
+com.bluebank.project.models
+com.bluebank.project.repositories
+com.bluebank.project.services
