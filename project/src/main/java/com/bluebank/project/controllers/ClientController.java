@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bluebank.project.dtos.ClientDTO;
+import com.bluebank.project.exception.ConstraintException;
+import com.bluebank.project.exception.PersistenceException;
 import com.bluebank.project.exception.ResourceNotFoundException;
 import com.bluebank.project.models.Client;
 import com.bluebank.project.services.ClientService;
@@ -37,9 +39,15 @@ public class ClientController {
 	@PostMapping()
 	@ApiOperation(value="Cadastra um novo cliente com os dados pessoais")
 	@ResponseStatus(HttpStatus.CREATED)
-	public ClientDTO registerClient(@Validated @RequestBody Client cliente, BindingResult br) {//throws DataIntegrityViolationException, Exception {
-//		if(br.hasErrors()) throw new ConstraintException(br.getAllErrors().get(0).getDefaultMessage());
-		return clienteService.registerNewClient(cliente);
+	public ClientDTO registerClient(@Validated @RequestBody Client cliente, BindingResult br) throws ConstraintException, PersistenceException{
+		if(br.hasErrors()) throw new ConstraintException(br.getAllErrors().get(0).getDefaultMessage());			
+		try {
+			return clienteService.registerNewClient(cliente);
+		} catch (ConstraintException e){
+			throw new ConstraintException(e.getMessage());
+		} catch (Exception e) {
+			throw new PersistenceException("Um erro ocorrou ao cadastrar o cliente: " + e.getMessage());
+		}
 	}
 	
 	@GetMapping("/{cpfcnpj}")

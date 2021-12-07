@@ -1,8 +1,6 @@
-=======
-
 # Desafio final da PanAcademy
 
-Um desafio que consiste em criar uma API para gerenciamento de contas bancárias e suas respectivas transações.
+Um desafio que consiste em criar uma `API REST` para gerenciamento de contas bancárias e suas respectivas transações.
 
 ## Sobre este repositório
 
@@ -12,9 +10,23 @@ Este repositório contém não só o código principal da aplicação, mas tamb�
 
 >_Logo abaixo você encontrará um índice com explicações mais detalhadas sobre o que foi mencionado :)_
 
-## Instruções para instalação e execução
+## Documentação
 
-Caso vocẽ queira executar o projeto na sua própria máquina basta ter pelo menos o `JDK` instalado e alguma `IDE` de sua preferência
+As funcionalidades do código estão descritas em uma série de páginas web construídas pela ferramenta [Javadoc](https://docs.oracle.com/javase/8/docs/technotes/tools/windows/javadoc.html), para ter acesso à documentação do código basta entrar na pasta [/project/doc](./project/doc/) e dar dois clicks no arquivo [`index.html`](./project/doc/index.html), seu navegador deverá fazer o resto ;)
+
+As descrições de cada endpoint estão em uma página web construída pela ferramenta [`Swagger`](https://swagger.io/), esta página pode ser acessada através do link [localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html) quando a aplicação estiver em execução ;D
+
+No índice de links a seguir estão detalhes sobre o desafio proposto, o desenvolvimento do projeto e um guia rápido para todos os endpoints que poderão ser igualmente acessado pelo `Swagger`.
+
+- [Descrição do desafio](./documentation/challenge_description.md)
+- [Estratégias de gestão e fluxo de trabalho](./documentation/management.md)
+- [Ferramentas e técnicas usadas no código](./documentation/project_patterns.md)
+- [Deploy na AWS](./documentation/AWS_deploy.md)
+- [Lista de endpoints da aplicação](./documentation/endpoint_list.md)
+
+## Instruções para instalação e execução local
+
+Caso vocẽ queira executar o projeto na sua própria máquina basta ter pelo menos o `JDK` instalado, alguma `IDE` de sua preferência e um banco de dados MySQL devidamente configurado.
 
 Você poderá obter o JDK pelos seguintes meios:
 - [Website da Oracle](https://www.oracle.com/java/technologies/downloads/)
@@ -23,18 +35,31 @@ Você poderá obter o JDK pelos seguintes meios:
 
 >_Guiá-lo por todo o processo de instalação dessa ferramenta e correção de eventuais problemas estão além do escopo deste guia._
 
-Caso você já tenha o JDK instalado e já esteja familiarizado com o uso de uma IDE basta importar o projeto e executar sua classe principal.
+Recomendamos o uso das seguintes IDEs:
+- [Eclipse](https://www.eclipse.org/downloads/)
+- [Intellij](https://www.jetbrains.com/idea/download)
 
-Uma página descrevendo cada possível `requisição` em cada possível `endpoint` deverá estar acessível a partir do endereço [127.0.0.1:8080](http://127.0.0.1:8080) no seu navegador.
+Para a instalação do MySQL, há os seguintes meios:
+- [Website oficial para download do MySQL](https://dev.mysql.com/downloads/)
+- [Website para download do MariaDB](https://mariadb.org/download/)
+- A versão de MySQL ou de MariaDB do gerenciador de pacotes do seu sistema `Linux`
 
-Apesar de poder ser executado localmente, este projeto foi feito para ser implantado em um servidor remoto da AWS
-(to-do: isso deveria ter uma marcação de anotação ?)
+>_Nota: em caso de distribuições Linux que usam Systemd, não esqueça de iniciar o `daemon` do banco de dados com os comandos: <br>
+`sudo systemctl start mysql` <br>
+ou <br>
+`sudo systemctl start mariadb`_
 
-(to-do: explicar rapidamente o processo de deploy na AWS)
+Crie um usuário e senha no seu banco de dados e altere o valor das chaves `spring.datasource.username` e `spring.datasource.password` do arquivo [application.properties](./project/src/main/resources/application.properties) com as suas credenciais.
+
+Com o JDK instalado e o banco de dados instalado e devidamente configurado, basta importar o projeto na sua IDE e executar a classe principal.
+
+Uma página descrevendo cada possível `requisição` em cada possível `endpoint` deverá estar acessível a partir do endereço [localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html) no seu navegador.
+
+>_Apesar de poder ser executado localmente, este projeto foi feito para ser implantado em um servidor remoto da AWS, a descrição do processo está no arquivo [documentation/AWS_deploy.md](./documentation/AWS_deploy.md)_
 
 ## Como contribuir
 
-1. Faça um `fork` deste repositório clicando [aqui](https://github.com/IcaroPablo/BlueBank/fork) e clone-o na sua máquina pessoal
+1. Faça um [`fork`](https://github.com/alanomenezes/BlueBank/fork) deste repositório e clone-o na sua máquina pessoal
 ```console
 $ git clone https://github.com/alanomenezes/BlueBank.git
 ```
@@ -52,87 +77,14 @@ $ git push origin my-new-feature-branch
 ```
 5. Crie um novo pull request para este repositório a partir do repositório do seu fork
 
-(to-do: tópicos para licença e agradecimentos, localizar o índice da documentação)
-
 ## Autores
 
 Este repositório foi construído colaborativamente pelos seguintes membros: [Alano Menezes](https://github.com/alanomenezes), [Marcos Paulo](https://github.com/hellomp), [Hellimateas Chaves](https://github.com/Hellimateas), [Pedro Henrique](https://github.com/PedroHenriquebc) e [Ícaro Pablo](https://github.com/IcaroPablo).
 
-### BlueBank
+## Licença
 
-O banco fictício BlueBank está construindo uma nova plataforma e precisa de
-uma API para gerenciar as transações. Utilize suas novas habilidades com Java, Banco
-de dados e AWS.
-O sistema deve permitir cadastro de novos clientes, incluindo dados pessoais e
-dados para contato. O cliente deve ser atrelado a uma conta bancária e registrar
-histórico de transações entre as contas.
+Este projeto está licenciado sob a licença **GPLv3**, veja o arquivo [LICENSE](./LICENSE) para mais detalhes.
 
+## Agradecimentos
 
-
-#### SUGESTÃO DE ORGANIZAÇÃO DO PROJETO
-
-Elaboração do kanban com definição dos entregáveis
-\1. Elaboração do kanban(sugestão de utilização: Trello,Jira, etc)
-\2. Criação do backlog(com tarefas referente ao desenvolvimento)
-\3. Detalhamento descritivo das tarefas da squad dentro dos seus cards (e
-não apenas com títulos genéricos no card)-Nome para a squad
-\4. Formatação do kanban padrão "to do, doing, done"
-\5. Definição de data de entrega das tarefas nos cards
-\6. Definição de responsável pelo card ou checklist de completude
-\7. Priorização dos cards (ex: tags com cores para maior relevância ou com
-títulos descritivos para nível de importância na priorização)
-
-
-
-#### ENTREGAS MÍNIMAS
-
-\1. Metodologias Ágeis:
-a. Kanban com todas as tarefas organizadas e responsáveis definidos.
-\2. Back-end:
-a. Cadastro de clientes
-b. Listagem de clientes
-c. Atualização de clientes
-d. Deletar clientes
-e. Histórico de transações entre contas
-
-\3. Banco de Dados:
-a. Tabelas bem estruturadas e populadas com valores para testes.
-b. O Banco deve ser entregue em script SQL junto ao repositório.
-\4. Gerais:
-a. O código deve ser entregue em um repositório no Github.
-b. AAPIdeveserdisponibilizadaemambienteAWScomEC2eemBeanstalk.
-c. A aplicação deve ter um pipeline em Jenkins ou no Aws Build.
-d. A aplicação precisa ser configurada no API Gateway da AWS.
-e. A aplicação precisa ter no mínimo um endpoint de SNS para cadastro de
-emails e verificação automática.
-f. A aplicação precisa ter no mínimo um Lambda.
-g. Liste os endpoints no README.md
-
-
-
-#### ENTREGA OPCIONAL
-
-\1. Testes automatizados, podem ser testes unitários ou testes de integração.
-CRITÉRIOS DE AVALIAÇÃO
-\1. Documentação da Aplicação;
-\2. Sugestão de documentação com swagger;
-
-
-
-=======
-## Ferramentas
-
-Java spring boot my sql aws
-
-IDE de desenvolvimento: Eclipse, IntelliJ Versionamento de código:Git e Github Banco de dados: MySQL Software Cliente para banco de dados: DBeaver Hospedagem: Amazon Web Services (AWS) Postman Swagger Cliente SSH: Putty, MobaXTerm Jira: https://dbluebank.atlassian.net/jira/software/projects/DBLUEB/boards/1/roadmap
-
-## Links uteis
-
-Swagger: https://app.swaggerhub.com/organizations/PanAcademy Postman: https://www.postman.com/# RunRunIt: https://runrun.it/pt-BR/user_session/new Github: https://github.com/alanomenezes/BlueBank Clientes SSH: https://mobaxterm.mobatek.net/download.html https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html PhpMyAdmin: http://54.232.238.144/phpMyAdmin/ Git Flow: https://www.atlassian.com/br/git/tutorials/comparing-workflows/gitflow-workflow
-
-## Processos
-
-## Mapas de processos/negócios
-
-## Regras de negócio
-
+Gama academy e banco Pan, por todas essas aulas interessantes, pelos desafios propostos e pela excelente orientação durante todo o percurso do treinamento. Agradecemos especialmente nossos instrutores [Jenifer Plácido](https://www.linkedin.com/in/jenifer-pl%C3%A1cido-00b5611ab/), [Jonathan Ferreira](https://www.linkedin.com/in/jferreira33/) e [Ana Verônica](https://www.linkedin.com/in/ana-ver%C3%B4nica-nascimento-cruz-1896a0158/)

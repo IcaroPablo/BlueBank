@@ -3,16 +3,17 @@ package com.bluebank.project.services;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
 import com.bluebank.project.dtos.ClientDTO;
 import com.bluebank.project.enums.ClientStatusEnum;
+import com.bluebank.project.exception.ConstraintException;
 import com.bluebank.project.exception.ResourceNotFoundException;
 import com.bluebank.project.mappers.ClientMapper;
 import com.bluebank.project.models.Client;
 import com.bluebank.project.repositories.ClientRepository;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class ClientService {
@@ -27,7 +28,7 @@ public class ClientService {
 	AccountService accountService;
 	
 	@Transactional
-	public ClientDTO registerNewClient(Client client) {
+	public ClientDTO registerNewClient(Client client) throws ConstraintException{
 		ClientDTO clientDTO = new ClientDTO();
 		clientMapper.updateDtoFromClient(client, clientDTO);
 		clientRepository.save(client);
@@ -35,15 +36,14 @@ public class ClientService {
 	}
 	
 	public Client simpleSearchByCpfcnpj(String cpfcnpj) throws ResourceNotFoundException {
-		return clientRepository.findByCpfcnpj(cpfcnpj).orElseThrow(() -> new ResourceNotFoundException("tem não otario, errou"));
+		return clientRepository.findByCpfcnpj(cpfcnpj).orElseThrow(() -> new ResourceNotFoundException("O cliente não foi encontrado"));
 	}
 	
 	@Transactional
 	public ClientDTO showClientByCpfcnpj(String cpfcnpj) throws ResourceNotFoundException, Exception{
-		Client client = new Client();
 		ClientDTO clientDTO = new ClientDTO();
+		Client client = simpleSearchByCpfcnpj(cpfcnpj);
 		
-		simpleSearchByCpfcnpj(cpfcnpj);
 		clientMapper.updateDtoFromClient(client, clientDTO);
 		return clientDTO;
 	}

@@ -9,7 +9,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.bluebank.project.dtos.LoanDTO;
 import com.bluebank.project.dtos.TransferenceDTO;
+import com.bluebank.project.exception.ConstraintException;
 import com.bluebank.project.exception.ResourceNotFoundException;
+import com.bluebank.project.exception.TransactionException;
 import com.bluebank.project.mappers.LoanMapper;
 import com.bluebank.project.mappers.TransactionMapper;
 import com.bluebank.project.models.Loan;
@@ -39,7 +41,7 @@ public class LoanService {
   TransactionService transactionService;
 
   @Transactional
-  public LoanDTO createLoan(String cpfcnpj, Loan loan) throws ResourceNotFoundException {
+  public LoanDTO createLoan(String cpfcnpj, Loan loan) throws ResourceNotFoundException, ConstraintException{
     loan.setClient(clientService.simpleSearchByCpfcnpj(cpfcnpj));
 
     LoanDTO loanDTO = new LoanDTO();
@@ -48,14 +50,15 @@ public class LoanService {
   }
 
   @Transactional
-  public LoanDTO showLoanById(Long loanId) throws IllegalArgumentException{
-    Loan loan = loanRepository.findById(loanId).orElseThrow(() -> new IllegalArgumentException("Emprestimo não encontrado"));
+  public LoanDTO showLoanById(Long loanId) throws ResourceNotFoundException{
+    Loan loan = loanRepository.findById(loanId).orElseThrow(() -> new ResourceNotFoundException("O emprestímo não foi encontrado"));
     return loanMapper.updateEmprestimoDtoFromEmprestimo(loan, new LoanDTO());
   }
 
   @Transactional
-  public List<LoanDTO> showLoanByClientCpfcnpj(String cpfcnpj){
+  public List<LoanDTO> showLoanByClientCpfcnpj(String cpfcnpj) throws ResourceNotFoundException{
     List<LoanDTO> listLoanDTO = new ArrayList<LoanDTO>();
+    clientService.simpleSearchByCpfcnpj(cpfcnpj);
     for(Loan loan : loanRepository.findByClientId_Cpfcnpj(cpfcnpj)){
       listLoanDTO.add(loanMapper.updateEmprestimoDtoFromEmprestimo(loan, new LoanDTO()));
     }
@@ -63,8 +66,8 @@ public class LoanService {
   }
 
   @Transactional
-  public TransferenceDTO payLoan(Long loanId, Long accountId) throws IllegalArgumentException{
-    Loan loan = loanRepository.findById(loanId).orElseThrow(() -> new IllegalArgumentException("Emprestimo não encontrado"));
+  public TransferenceDTO payLoan(Long loanId, Long accountId) throws ResourceNotFoundException, TransactionException{
+    Loan loan = loanRepository.findById(loanId).orElseThrow(() -> new ResourceNotFoundException("O empréstimo não encontrado"));
     double moneyAmount = (loan.getBorrowedAmount() / loan.getInstallments()) + (loan.getBorrowedAmount() * loan.getFees());
     
     Transaction transaction = new Transaction();

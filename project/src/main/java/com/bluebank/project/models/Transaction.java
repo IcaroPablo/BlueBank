@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 import com.bluebank.project.enums.TransactionTypeEnum;
@@ -43,6 +44,7 @@ public class Transaction {
   
   private Date dataExecTransacao; // TODO: depende do lambda
 
+	@NotBlank
   private Double value;
 
   public Transaction() {
