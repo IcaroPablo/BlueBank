@@ -9,8 +9,6 @@ public class TransferenceDTO implements TransactionDTO {
 	private double previousBalance;
 	private double currentBalance;
 	private Long destinationAccount;
-//	private String scheduledDate; // TODO: verificar se é possível usar isso no lambda
-//	private String dataExecTransacao;
 	private Double value;
 	  
 	public TransferenceDTO() {
@@ -63,22 +61,6 @@ public class TransferenceDTO implements TransactionDTO {
 	public void setDestinationAccount(Long destinationAccount) {
 		this.destinationAccount = destinationAccount;
 	}
-	
-//	public String getScheduledDate() {
-//		return scheduledDate;
-//	}
-//	
-//	public void setScheduledDate(String scheduledDate) {
-//		this.scheduledDate = scheduledDate;
-//	}
-//	
-//	public String getDataExecTransacao() {
-//		return dataExecTransacao;
-//	}
-//	
-//	public void setDataExecTransacao(String dataExecTransacao) {
-//		this.dataExecTransacao = dataExecTransacao;
-//	}
 	
 	public Double getValue() {
 		return value;

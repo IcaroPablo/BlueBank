@@ -67,8 +67,8 @@ public class ClientController {
 	@PutMapping("/{cpfcnpj}")
 	@ApiOperation(value="Atualiza o cadastro do cliente atraves do CPF ou CNPJ")
 	@ResponseStatus(HttpStatus.ACCEPTED)
-	public ClientDTO updateClientRegistry(@PathVariable("cpfcnpj") String cpfcnpj, @RequestBody ClientDTO clientDTO) throws ResourceNotFoundException {//, BindingResult br) throws DataIntegrityViolationException, Exception {
-//		if(br.hasErrors()) throw new ConstraintException(br.getAllErrors().get(0).getDefaultMessage());
+	public ClientDTO updateClientRegistry(@PathVariable("cpfcnpj") String cpfcnpj, @Validated @RequestBody ClientDTO clientDTO, BindingResult br) throws DataIntegrityViolationException, ResourceNotFoundException, Exception {
+		if(br.hasErrors()) throw new ConstraintException(br.getAllErrors().get(0).getDefaultMessage());
 		return clienteService.updateClientRegistry(cpfcnpj, clientDTO);
 	}
 	
