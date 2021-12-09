@@ -40,14 +40,14 @@ public class TransactionController {
   @PostMapping("/saque/{id}")
   @ApiOperation(value="Este método faz um saque atraves de uma transação")
 	@ResponseStatus(HttpStatus.CREATED)
-	public WithdrawDTO withdraw(@Validated @PathVariable("id") Long id, @RequestBody Transaction transacao, BindingResult br) throws ResourceNotFoundException, TransactionException, PersistenceException, ConstraintException{
+	public WithdrawDTO withdraw(@PathVariable("id") Long id, @Validated @RequestBody Transaction transacao, BindingResult br) throws ResourceNotFoundException, TransactionException, PersistenceException, ConstraintException{
 		if(br.hasErrors()) throw new ConstraintException("Não foi possível fazer o saque: " + br.getAllErrors().get(0).getDefaultMessage());			
 		try {
 			return transacaoService.withdrawAmount(id, transacao);
 		} catch (TransactionException e){
 			throw new TransactionException(e.getMessage());
-		} catch (ConstraintException e){
-			throw new ConstraintException(e.getMessage());
+//		} catch (ConstraintException e){
+//			throw new ConstraintException(e.getMessage());
 		} catch (Exception e) {
 			throw new PersistenceException("Um erro ocorreu ao fazer o saque: " + e.getMessage());
 		}
@@ -56,7 +56,7 @@ public class TransactionController {
 	@PostMapping("/deposito/{id}")
 	@ApiOperation(value="Este método faz um depósito atraves de uma transação")
 	@ResponseStatus(HttpStatus.CREATED)
-	public DepositDTO deposit(@PathVariable("id") Long id, @RequestBody Transaction transacao, BindingResult br) throws ResourceNotFoundException, TransactionException, ConstraintException, PersistenceException{
+	public DepositDTO deposit(@PathVariable("id") Long id, @Validated @RequestBody Transaction transacao, BindingResult br) throws ResourceNotFoundException, TransactionException, ConstraintException, PersistenceException{
 		if(br.hasErrors()) throw new ConstraintException("Náo foi possível fazer o depósito: " + br.getAllErrors().get(0).getDefaultMessage());			
 		try {
 			return transacaoService.depositAmount(id, transacao);
