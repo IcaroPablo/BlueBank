@@ -3,6 +3,7 @@ package com.bluebank.project.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
@@ -37,7 +38,7 @@ public class ClientController {
 	ClientService clienteService;
 	
 	@PostMapping()
-	@ApiOperation(value="Cadastra um novo cliente com os dados pessoais")
+	@ApiOperation(value="Realiza o cadastro de um novo cliente")
 	@ResponseStatus(HttpStatus.CREATED)
 	public ClientDTO registerClient(@Validated @RequestBody Client cliente, BindingResult br) throws ConstraintException, PersistenceException{
 		if(br.hasErrors()) throw new ConstraintException(br.getAllErrors().get(0).getDefaultMessage());			
@@ -51,29 +52,29 @@ public class ClientController {
 	}
 	
 	@GetMapping("/{cpfcnpj}")
-	@ApiOperation(value="Consulta os dados de um cliente atraves do CPF ou CNPJ")
+	@ApiOperation(value="Consulta os dados de um cliente registrado dado seu CPF ou CNPJ")
 	@ResponseStatus(HttpStatus.OK)
 	public ClientDTO showClientByCpfcnpj(@PathVariable("cpfcnpj") String cpfcnpj) throws ResourceNotFoundException, Exception{
 		return clienteService.showClientByCpfcnpj(cpfcnpj);
 	}
 	
 	@GetMapping("/nome/{nome}")
-	@ApiOperation(value="Consulta os dados de um cliente atraves do nome")
+	@ApiOperation(value="Exibe os dados de todos os clientes que possuem o nome fornecido")
 	@ResponseStatus(HttpStatus.OK)
 	public List<ClientDTO> showClientByName(@PathVariable("nome") String nome) throws ResourceNotFoundException {
 		return clienteService.showClientByName(nome);
 	}
 	
 	@PutMapping("/{cpfcnpj}")
-	@ApiOperation(value="Atualiza o cadastro do cliente atraves do CPF ou CNPJ")
+	@ApiOperation(value="Atualiza o cadastro de um cliente registrado dado seu CPF ou CNPJ")
 	@ResponseStatus(HttpStatus.ACCEPTED)
-	public ClientDTO updateClientRegistry(@PathVariable("cpfcnpj") String cpfcnpj, @RequestBody ClientDTO clientDTO) throws ResourceNotFoundException {//, BindingResult br) throws DataIntegrityViolationException, Exception {
-//		if(br.hasErrors()) throw new ConstraintException(br.getAllErrors().get(0).getDefaultMessage());
+	public ClientDTO updateClientRegistry(@PathVariable("cpfcnpj") String cpfcnpj, @Validated @RequestBody ClientDTO clientDTO, BindingResult br) throws DataIntegrityViolationException, ResourceNotFoundException, Exception {
+		if(br.hasErrors()) throw new ConstraintException(br.getAllErrors().get(0).getDefaultMessage());
 		return clienteService.updateClientRegistry(cpfcnpj, clientDTO);
 	}
 	
 	@DeleteMapping("/{cpfcnpj}")
-	@ApiOperation(value="Desativa o cadastro do cliente")
+	@ApiOperation(value="Desativa o cadastro de um cliente registrado dado seu CPF ou CNPJ")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void deactivateClientRegistry(@PathVariable("cpfcnpj") String cpfcnpj) throws ResourceNotFoundException {
 		clienteService.deactivateClientRegistry(cpfcnpj);

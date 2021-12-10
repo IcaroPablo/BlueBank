@@ -1,5 +1,7 @@
 package com.bluebank.project.models;
 
+import java.util.Objects;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,7 +16,7 @@ public class Client {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private Long id;
 	
 	@NotBlank
 	private String name;
@@ -44,11 +46,11 @@ public class Client {
 		super();
 	}
 
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -116,4 +118,25 @@ public class Client {
 		this.status = status;
 	}
 
+	@Override
+	public int hashCode() {
+		return Objects.hash(cep, cpfcnpj, email, name, password, phoneNumber, status, type);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Client other = (Client) obj;
+		return Objects.equals(cep, other.cep) && Objects.equals(cpfcnpj, other.cpfcnpj)
+				&& Objects.equals(email, other.email) && Objects.equals(name, other.name)
+				&& Objects.equals(password, other.password) && Objects.equals(phoneNumber, other.phoneNumber)
+				&& status == other.status && Objects.equals(type, other.type);
+	}
+
+	
 }

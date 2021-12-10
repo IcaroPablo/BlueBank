@@ -28,6 +28,6 @@ public interface ClientRepository extends JpaRepository<Client, Long> {
 	* @param  name  a string containing a complete or part of the client entity's name attribute
 	* @return a list of client objects whose name matches the search containing all the database table's columns data into its attributes
 	*/
-	public List<Client> findByNameContaining(String name);
+	public Optional<List<Client>> findByNameContaining(String name);
 	
 }

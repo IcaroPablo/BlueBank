@@ -49,8 +49,11 @@ public class ClientService {
 	}
 	
 	@Transactional
-	public List<ClientDTO> showClientByName(String name) throws ResourceNotFoundException {
-		List<Client> listClientAux = clientRepository.findByNameContaining(name);
+	public List<ClientDTO> showClientByName(String name) throws ResourceNotFoundException{
+		List<Client> listClientAux = clientRepository.findByNameContaining(name).get();
+		if(listClientAux.isEmpty()) {
+			throw new ResourceNotFoundException("O cliente não foi encontrado");
+		}
 		List<ClientDTO> listClientDTOAux = new ArrayList<>();
 		for(Client clientAux : listClientAux) {
 			listClientDTOAux.add(clientMapper.updateDtoFromClient(clientAux, new ClientDTO()));
