@@ -37,7 +37,7 @@ public class AccountController {
 	AccountService contaService;
 	
 	@PostMapping("/{cpfcnpj}")
-	@ApiOperation(value="Cadastra um conta com o CPF ou CNPJ")
+	@ApiOperation(value="Realiza a criação de uma conta no nome de um cliente já registrado dado seu CPF ou CNPJ")
 	@ResponseStatus(HttpStatus.CREATED)
 	public AccountDTO registerAccount(@PathVariable("cpfcnpj") String cpfcnpj, @Validated @RequestBody Account conta, BindingResult br) throws ResourceNotFoundException, ConstraintException, PersistenceException{
 		if(br.hasErrors()) throw new ConstraintException("Não foi possível criar a conta: " + br.getAllErrors().get(0).getDefaultMessage());			
@@ -51,35 +51,35 @@ public class AccountController {
 	}
 
 	@GetMapping("/id/{id}")
-	@ApiOperation(value="Consulta os dados da conta atraves do id")
+	@ApiOperation(value="Consulta os dados de uma conta registrada dado o seu ID")
 	@ResponseStatus(HttpStatus.OK)
 	public AccountDTO consultAccountRegistryById(@PathVariable("id") Long id) throws ResourceNotFoundException{
 		return contaService.showAccountById(id);
 	}
 	
 	@GetMapping("/cpfcnpj/{cpfcnpj}")
-	@ApiOperation(value="Consulta os dados da conta atraves do CPF ou CNPJ")
+	@ApiOperation(value="Consulta os dados de todas as contas de um cliente dado seu CPF ou CNPJ")
 	@ResponseStatus(HttpStatus.OK)
 	public List<AccountDTO> consultAccountRegistryByCpfcnpj(@PathVariable("cpfcnpj") String cpfcnpj) throws ResourceNotFoundException{
 		return contaService.showAccountsByClientCpfcnpj(cpfcnpj);
 	}
 	
 	@PutMapping("/update/{id}/{cpfcnpj}")
-	@ApiOperation(value="Atualiza os dados pelo id ou CPF ou CNPJ")
+	@ApiOperation(value="Altera o titular de uma conta dado o seu ID e o CPF ou CNPJ do novo titular")
 	@ResponseStatus(HttpStatus.ACCEPTED)
 	public AccountDTO changeAccountHolder(@PathVariable("id") Long id, @PathVariable("cpfcnpj") String cpfcnpj) throws ResourceNotFoundException {
 		return contaService.changeAccountHolder(id, cpfcnpj);
 	}
 	
 	@DeleteMapping("/delete/id/{id}")
-	@ApiOperation(value="Desativa a conta do cliente pelo id")
+	@ApiOperation(value="Desativa uma conta registrada dado o seu ID")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void deactivateAccountRegistryById(@PathVariable("id") Long id) throws ResourceNotFoundException{
 		contaService.deactivateAccountById(id);
 	}
 	
 	@DeleteMapping("/delete/cpfcnpj/{cpfcnpj}")
-	@ApiOperation(value="Desativa a conta do cliente pelo CPF ou CNPJ")
+	@ApiOperation(value="Desativa todas as contas de um cliente dado CPF ou CNPJ")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void deactivateAccountRegistryByCpfcnpj(@PathVariable("cpfcnpj") String cpfcnpj) throws ResourceNotFoundException{
 		contaService.deactivateAccountsByClientCpfcnpj(cpfcnpj);
