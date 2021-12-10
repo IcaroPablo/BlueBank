@@ -60,3 +60,14 @@ URL base para execução local: `http://localhost:8080`
 - GET:
   - `/saldo/{id}` -> Consulta o saldo de uma conta registrada dado o seu ID
   - `/extrato/{id}` -> Consulta o extrato de uma conta registrada dado o seu ID
+
+-------------------
+
+### Notification Controller(`/emailsns`)
+
+- POST:
+  - `/subscribe/{email}` -> Cadastra um email para que receba notificações
+  - `/send` -> Envia uma mensagem para os emails cadastrados
+
+- DELETE:
+  - `/unsubscribe/{email}` -> Descadastra um email para que pare de receber notificações
