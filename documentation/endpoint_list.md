@@ -7,18 +7,18 @@ URL base para execução local: `http://localhost:8080`
 ### Account Controller (`/conta`)
 
 - POST:
-  - `/{cpfcnpj}` -> Cadastra um conta com o CPF ou CNPJ
+  - `/{cpfcnpj}` -> Realiza a criação de uma conta no nome de um cliente já registrado dado seu CPF ou CNPJ
 
 - GET:
-  - `/id/{id}` -> Consulta os dados da conta atraves do id
-  - `/cpfcnpj/{cpfcnpj}` -> Consulta os dados da conta atraves do CPF ou CNPJ
+  - `/id/{id}` -> Consulta os dados de uma conta registrada dado o seu ID
+  - `/cpfcnpj/{cpfcnpj}` -> Consulta os dados de todas as contas de um cliente dado seu CPF ou CNPJ
 
 - PUT:
-  - `/update/{id}/{cpfcnpj}` -> Atualiza os dados pelo id ou CPF ou CNPJ
+  - `/update/{id}/{cpfcnpj}` -> Altera o titular de uma conta dado o seu ID e o CPF ou CNPJ do novo titular
 
 - DELETE:
-  - `/delete/id/{id}` -> Desativa a conta do cliente pelo id
-  - `/delete/cpfcnpj/{cpfcnpj}` -> Desativa todas as conta do cliente pelo CPF ou CNPJ
+  - `/delete/id/{id}` -> Desativa uma conta registrada dado o seu ID
+  - `/delete/cpfcnpj/{cpfcnpj}` -> Desativa todas as contas de um cliente dado CPF ou CNPJ
 
 -------------------
 
@@ -28,35 +28,46 @@ URL base para execução local: `http://localhost:8080`
   - `/` -> Cadastra um novo cliente com os dados pessoais
 
 - GET:
-  - `/{cpfcnpj}` ->  Consulta os dados de um cliente atraves do CPF ou CNPJ
-  - `/nome/{nome}` -> Consulta os dados de um cliente atraves do nome
+  - `/{cpfcnpj}` ->  Consulta os dados de um cliente registrado dado seu CPF ou CNPJ
+  - `/nome/{nome}` -> Exibe os dados de todos os clientes que possuem o nome fornecido
 
 - PUT:
-  - `/{cpfcnpj}` -> Atualiza o cadastro do cliente atraves do CPF ou CNPJ
+  - `/{cpfcnpj}` -> Atualiza o cadastro de um cliente registrado dado seu CPF ou CNPJ
 
 - DELETE:
-  - `/{cpfcnpj}` -> Desativa o cadastro do cliente
+  - `/{cpfcnpj}` -> Desativa o cadastro de um cliente registrado dado seu CPF ou CNPJ
 
 -------------------
 
 ### Loan Controller(`/emprestimo`)
 
 - POST: 
-  - `/{cpfcnpj}` -> Este método cria um empréstimo
-  - `/pagamento/{emprestimoId}/{contaId}` -> Este método faz o pagamento de um empréstimo
+  - `/{cpfcnpj}` -> Realiza a criação de um empréstimo dado o CPF ou o CNPJ de um cliente registrado
+  - `/pagamento/{emprestimoId}/{contaId}` -> Realiza o pagamento do valor emprestado dados o ID do empréstimo e o ID conta da qual o valor será transferido
 
 - GET:
-  - `/id/{emprestimoId}` -> Este método consulta um empréstimo pelo id
-  - `/cpfcnpj/{cpfcnpj}")` -> Este método consulta um empréstimo pelo cpf/cnpj
+  - `/id/{emprestimoId}` -> Consulta informações de um empréstimo registrado dado o seu ID
+  - `/cpfcnpj/{cpfcnpj}")` -> Consulta informações de um empréstimo registrado dado o CPF ou o CNPJ do cliente que o solicitou
 
 -------------------
 
 ### Transaction Controller(`/transacao`)
 
 - POST: 
-  - `/saque/{id}` -> Este método faz um saque atraves de uma transação
-  - `/deposito/{id}` -> Este método faz um depósito atraves de uma transação
+  - `/saque/{id}` -> Realização de saque dado o ID de uma conta registrada
+  - `/deposito/{id}` -> Realização de depósito dado o ID de uma conta registrada
 
 - GET:
-  - `/saldo/{id}` -> Este método consulta o saldo de uma conta
-  - `/extrato/{id}` -> Este método consulta o extrato de uma conta
+  - `/saldo/{id}` -> Consulta o saldo de uma conta registrada dado o seu ID
+  - `/extrato/{id}` -> Consulta o extrato de uma conta registrada dado o seu ID
+
+-------------------
+
+### Notification Controller(`/emailsns`)
+
+- POST:
+  - `/subscribe/{email}` -> Cadastra um email para que receba notificações
+  - `/send` -> Envia uma mensagem para os emails cadastrados
+
+- DELETE:
+  - `/unsubscribe/{email}` -> Descadastra um email para que pare de receber notificações
