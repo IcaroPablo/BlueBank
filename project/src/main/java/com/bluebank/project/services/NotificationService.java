@@ -1,4 +1,4 @@
-package com.bluebank.project.notifications;
+package com.bluebank.project.services;
 
 import java.util.List;
 

@@ -38,7 +38,7 @@ public class TransactionController {
   TransactionService transacaoService;
 
   @PostMapping("/saque/{id}")
-  @ApiOperation(value="Este método faz um saque atraves de uma transação")
+  @ApiOperation(value="Realização de saque dado o ID de uma conta registrada")
 	@ResponseStatus(HttpStatus.CREATED)
 	public WithdrawDTO withdraw(@PathVariable("id") Long id, @Validated @RequestBody Transaction transacao, BindingResult br) throws ResourceNotFoundException, TransactionException, PersistenceException, ConstraintException{
 		if(br.hasErrors()) throw new ConstraintException("Não foi possível fazer o saque: " + br.getAllErrors().get(0).getDefaultMessage());			
@@ -54,7 +54,7 @@ public class TransactionController {
 	}
 	
 	@PostMapping("/deposito/{id}")
-	@ApiOperation(value="Este método faz um depósito atraves de uma transação")
+	@ApiOperation(value="Realização de depósito dado o ID de uma conta registrada")
 	@ResponseStatus(HttpStatus.CREATED)
 	public DepositDTO deposit(@PathVariable("id") Long id, @Validated @RequestBody Transaction transacao, BindingResult br) throws ResourceNotFoundException, TransactionException, ConstraintException, PersistenceException{
 		if(br.hasErrors()) throw new ConstraintException("Náo foi possível fazer o depósito: " + br.getAllErrors().get(0).getDefaultMessage());			
@@ -66,14 +66,14 @@ public class TransactionController {
 	}
 	
 	@GetMapping("/saldo/{id}")
-	@ApiOperation(value="Este método consulta o saldo de uma conta")
+	@ApiOperation(value="Consulta o saldo de uma conta registrada dado o seu ID")
 	@ResponseStatus(HttpStatus.OK)
 	public double balance(@PathVariable("id") Long id) throws ResourceNotFoundException, TransactionException{
 		return transacaoService.showAccountBalanceById(id);
 	}
 	
 	@GetMapping("/extrato/{id}")
-	@ApiOperation(value="Este método consulta o extrato de uma conta")
+	@ApiOperation(value="Consulta o extrato de uma conta registrada dado o seu ID")
 	@ResponseStatus(HttpStatus.OK)
 	public List<TransactionDTO> extract(@PathVariable("id") Long id) throws ResourceNotFoundException, TransactionException{
 		return transacaoService.showTransactionsByAccountId(id);
