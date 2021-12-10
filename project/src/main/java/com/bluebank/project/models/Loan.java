@@ -22,9 +22,6 @@ public class Loan {
   @ManyToOne
   private Client client;
 
-//  @NotNull
-//  private String numeroContrato; //TODO: mudar isso pra ID
-
   @NotNull
   @JsonFormat(pattern = "dd/MM/yyyy")
   private Date startDate;

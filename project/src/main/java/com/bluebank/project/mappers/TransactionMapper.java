@@ -42,7 +42,7 @@ public class TransactionMapper {
 	
 	public DepositDTO updateDepositDtoFromTransaction(Transaction transaction, DepositDTO depositDTO) {
 		depositDTO.setTransactionDate(transaction.getTransactionDate().toString());
-		depositDTO.setTransactionType("DEPÓSITO"); // TODO: pegar string do nome completo
+		depositDTO.setTransactionType("DEPÓSITO");
 		depositDTO.setPreviousBalance(transaction.getPreviousBalance());
 		depositDTO.setCurrentBalance(transaction.getCurrentBalance());
 		depositDTO.setDepositValue(transaction.getValue());
