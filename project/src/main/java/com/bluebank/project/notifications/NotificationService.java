@@ -15,7 +15,7 @@ import com.amazonaws.services.sns.model.UnsubscribeResult;
 @Service
 public class NotificationService {
 
-    public void subEmail(AmazonSNSClient snsClient, String topicArn, String email) {
+    public void subscribeEmail(AmazonSNSClient snsClient, String topicArn, String email) {
 
         try {
         	SubscribeResult result = snsClient.subscribe(topicArn, "email", email);

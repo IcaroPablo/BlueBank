@@ -45,7 +45,7 @@ public class SubscriptionManager {
 	@ResponseStatus(HttpStatus.CREATED)
 	public void subscribeEmail(@PathVariable("email") String email) {// throws ResourceNotFoundException, ConstraintException, PersistenceException{
 		
-		topicRegister.subEmail(this.snsClient, "arn:aws:sns:us-east-2:965934840569:startrek", email);
+		topicRegister.subscribeEmail(this.snsClient, "arn:aws:sns:us-east-2:965934840569:startrek", email);
 
 	}
 	
