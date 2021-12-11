@@ -27,10 +27,14 @@ public class ClientService {
 	@Autowired
 	AccountService accountService;
 	
+	@Autowired
+	NotificationService notificationService;
+	
 	@Transactional
 	public ClientDTO registerNewClient(Client client) throws ConstraintException{
 		ClientDTO clientDTO = new ClientDTO();
 		clientMapper.updateDtoFromClient(client, clientDTO);
+		notificationService.subscribeEmail(client.getEmail());
 		clientRepository.save(client);
 		return clientDTO;
 	}
