@@ -26,7 +26,7 @@ No índice de links a seguir estão detalhes sobre o desafio proposto, o desenvo
 
 ## Instruções para instalação e execução local
 
-Caso vocẽ queira executar o projeto na sua própria máquina basta ter pelo menos o `JDK` instalado, alguma `IDE` de sua preferência e um banco de dados MySQL devidamente configurado.
+Caso vocẽ queira executar o projeto na sua própria máquina basta ter pelo menos o `JDK` instalado, alguma `IDE` de sua preferência e um banco de dados `MySQL` devidamente configurado.
 
 Você poderá obter o JDK pelos seguintes meios:
 - [Website da Oracle](https://www.oracle.com/java/technologies/downloads/)
