@@ -36,7 +36,7 @@ Neste arquivo estão descritas algumas ferramentas que usamos ao longo do projet
 
 ### Documentação e Testes
 
-- **Javadoc**: usamos o ja conhecido `javadoc` por ser uma ferramenta completa quanse se diz respeito a documentação de referência de código, decidimos incluir nele explicações sobre os métodos criados em inglês, para que seja mais acessível. Por boa prática, decidimos restringir a anotação `@author` apenas às classes, pois ela poluiria o código com muitas linhas desnecessárias. Na verdade o uso dessa anotação não é necessário já que usamos `git` para controle de versão, mas ela ajuda a entender mais facilmente a distribuição de tarefas ao longo do código.
+- **Javadoc**: usamos o ja conhecido `javadoc` por ser uma ferramenta completa quanse se diz respeito a documentação de referência de código, decidimos incluir nele explicações sobre os métodos criados em inglês, para que seja mais acessível. Por boa prática, decidimos restringir a anotação `@author` apenas às classes, pois ela poluiria o código com muitas linhas desnecessárias. Na verdade, o uso dessa anotação não é necessário já que usamos `git` para controle de versão, mas ela ajuda a entender mais facilmente a distribuição de tarefas ao longo do código.
  
 - **Swagger**: seguindo a sugestão do desafio, usamos o `Swagger` para documentar os [`endpoints`](./endpoint_list.md) da aplicação. As funções de cada endpoint definido nos controller da aplicação estão devidamente descritas numa página gerada em `buildtime` acessível pelo link [localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html).
  
