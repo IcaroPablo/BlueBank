@@ -36,12 +36,12 @@ Na imagem acima podemos ver os e-mails da equipe cadastrados para teste. Impleme
 
 Credenciais de acesso são necessárias, mas elas devem ser definidas em variáveis de ambiente especificadas no [`README.md`](/README.md) por razões de segurança.
 
-Além disso criamos também um endpoint na `API` para envio de mensagens a todos os emails incritos no tópico definido anteriormente.
+Além disso criamos também um endpoint na `API` para envio de mensagens a todos os e-mails inscritos no tópico definido anteriormente.
 
 >_Nota: todos os endpoints mencionados acima podem ser encontrados na [`lista de endpoints do projeto`](endpoint_list.md) para referência rápida_
 
 ### API Gateway
 
-Os endpoints da aplicação foram configurados no API Gatewaay, serviço da AWS que serve como uma porta de entrada para acesso de dados, regras de negócio e funcionalidades do back-end.
+Os endpoints da aplicação foram configurados no API Gateway, serviço da AWS que serve como uma porta de entrada para acesso de dados, regras de negócio e funcionalidades do back-end.
 
-Com o API Gateway foi possíveel unificar os endpoints da aplicação em um só domínio.
+Com o API Gateway foi possível unificar os endpoints da aplicação em um só domínio.
