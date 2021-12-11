@@ -20,6 +20,8 @@ As tarefas são o nível de abstração mais baixo da definição das ações qu
 
 o roadmap que usamos no nosso projeto não foi interamente planejado de modo a obedecer a datas, ele é incrementado automaticamente pela plataforma de gestão que escolhemos,`Jira`, à medida que a conclusão de tarefas de cada épico vai ocorrendo ao longo do tempo.
 
+>_Nota: para visualizar o `roadmap completo` gerado ao fim do projeto abra o arquivo [`/documentation/assets/jira_roadmap.png`](/documentation/assets/jira_roadmap.png)_
+
 ### Quadro Kanban
 
 ![gif kanban jira](./assets/kanban.gif)

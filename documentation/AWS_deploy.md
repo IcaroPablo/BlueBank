@@ -24,6 +24,22 @@ Alguns componentes foram definidos como o próprio aplicativo a ser executado, a
 
 Cada versão do aplicativo é salva no `Amazon S3`, e um novo aplicativo é gerado ao final da execução do Pipeline, substuindo a versão anterior.
 
+### AWS SNS
+
+![AWS SNS Topic](assets/aws_sns_topic.jpg)
+
+Criamos um `tópico` na AWS para cadastro de emails usando a interface gráfica do `website`. Esse tópico é usado para cadastro de e-mail dos clientes registrados no banco de dados e, claro, para enviar a todos eles mensagens pertinentes sobre suas contas.
+
+![AWS SNS Subscribers](assets/aws_sns_subscribers.jpg)
+
+Na imagem acima podemos ver os e-mails da equipe cadastrados para teste. Implementamos em nossa `API` enpoints tanto para cadastrar quanto para descadastrar e-mails fazendo uso do `SDK` disponibilizado pela `AWS` como uma dependência do `Maven` (veja o arquivo [`pom.xml`](/project/pom.xml)).
+
+Credenciais de acesso são necessárias, mas elas devem ser definidas em variáveis de ambiente especificadas no [`README.md`](/README.md) por razões de segurança.
+
+Além disso criamos também um endpoint na `API` para envio de mensagens a todos os emails incritos no tópico definido anteriormente.
+
+>_Nota: todos os endpoints mencionados acima podem ser encontrados na [`lista de endpoints do projeto`](endpoint_list.md) para referência rápida_
+
 ### API Gateway
 
 Os endpoints da aplicação foram configurados no API Gatewaay, serviço da AWS que serve como uma porta de entrada para acesso de dados, regras de negócio e funcionalidades do back-end.

@@ -26,7 +26,7 @@ No índice de links a seguir estão detalhes sobre o desafio proposto, o desenvo
 
 ## Instruções para instalação e execução local
 
-Caso vocẽ queira executar o projeto na sua própria máquina basta ter pelo menos o `JDK` instalado, alguma `IDE` de sua preferência e um banco de dados MySQL devidamente configurado.
+Caso vocẽ queira executar o projeto na sua própria máquina basta ter pelo menos o `JDK` instalado, alguma `IDE` de sua preferência e um banco de dados `MySQL` devidamente configurado.
 
 Você poderá obter o JDK pelos seguintes meios:
 - [Website da Oracle](https://www.oracle.com/java/technologies/downloads/)
@@ -50,6 +50,8 @@ ou <br>
 `sudo systemctl start mariadb`_
 
 Crie um usuário e senha no seu banco de dados e altere o valor das chaves `spring.datasource.username` e `spring.datasource.password` do arquivo [application.properties](./project/src/main/resources/application.properties) com as suas credenciais.
+
+Defina os valores das variáveis de ambiente `AWS_ID` e `AWS_SECRET` com suas credenciais de acesso AWS, para que o cadastro de emails funcione corretamente. Caso tenha dúvidas sobre como obter suas credenciais veja o guia [AWS Account and Access Keys](https://docs.aws.amazon.com/powershell/latest/userguide/pstools-appendix-sign-up.html).
 
 Com o JDK instalado e o banco de dados instalado e devidamente configurado, basta importar o projeto na sua IDE e executar a classe principal.
 
