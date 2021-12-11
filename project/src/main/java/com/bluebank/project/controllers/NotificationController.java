@@ -26,30 +26,16 @@ import io.swagger.annotations.ApiOperation;
 @Api(value="Simples sistema para gerenciamento de notificações")
 @CrossOrigin(origins="*")
 public class NotificationController {
-
-	AmazonSNSClient snsClient;
-	String topicARN;
 	
 	@Autowired
 	NotificationService topicRegister;
-	
-	NotificationController() {
-		String aws_id = System.getenv("AWS_ID");
-		String aws_secret = System.getenv("AWS_SECRET");
-		snsClient = (AmazonSNSClient)AmazonSNSClient.builder()
-													.withRegion(Regions.US_EAST_2)
-													.withCredentials(new AWSStaticCredentialsProvider
-																	(new BasicAWSCredentials(aws_id, aws_secret)))
-													.build();
-		topicARN = "arn:aws:sns:us-east-2:965934840569:startrek";
-	}
 	
 	@PostMapping("/subscribe/{email}")
 	@ApiOperation(value="Cadastra um email para que receba notificações")
 	@ResponseStatus(HttpStatus.CREATED)
 	public void subscribeEmail(@PathVariable("email") String email) {// throws ResourceNotFoundException, ConstraintException, PersistenceException{
 		
-		topicRegister.subscribeEmail(this.snsClient, this.topicARN, email);
+		topicRegister.subscribeEmail(email);
 
 	}
 	
@@ -59,7 +45,7 @@ public class NotificationController {
 	public void registerEmail(@RequestBody SNSMessageDTO snsMessageDTO) {// throws ResourceNotFoundException, ConstraintException, PersistenceException{
 
 		String message = snsMessageDTO.getMessage();
-		topicRegister.sendMessageToTopic(snsClient, this.topicARN, message);
+		topicRegister.sendMessageToTopic(message);
 
 	}
 	
@@ -68,7 +54,7 @@ public class NotificationController {
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void unsubscribeEmail(@PathVariable("email") String email) {// throws ResourceNotFoundException, ConstraintException, PersistenceException{
 		
-		topicRegister.unsubscribeEmail(this.snsClient, this.topicARN, email);
+		topicRegister.unsubscribeEmail(email);
 
 	}
 
