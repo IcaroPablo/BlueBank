@@ -51,7 +51,7 @@ ou <br>
 
 Crie um usuário e senha no seu banco de dados e altere o valor das chaves `spring.datasource.username` e `spring.datasource.password` do arquivo [application.properties](./project/src/main/resources/application.properties) com as suas credenciais.
 
-Defina os valores das variáveis de ambiente `AWS_ID` e `AWS_SECRET` com suas credenciais de acesso, para que o cadastro de emails funcione corretamente. Caso tenha dúvidas sobre como obter suas credenciais veja o guia [AWS Account and Access Keys](https://docs.aws.amazon.com/powershell/latest/userguide/pstools-appendix-sign-up.html).
+Defina os valores das variáveis de ambiente `AWS_ID` e `AWS_SECRET` com suas credenciais de acesso AWS, para que o cadastro de emails funcione corretamente. Caso tenha dúvidas sobre como obter suas credenciais veja o guia [AWS Account and Access Keys](https://docs.aws.amazon.com/powershell/latest/userguide/pstools-appendix-sign-up.html).
 
 Com o JDK instalado e o banco de dados instalado e devidamente configurado, basta importar o projeto na sua IDE e executar a classe principal.
 
