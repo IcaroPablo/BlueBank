@@ -26,11 +26,11 @@ Cada versão do aplicativo é salva no `Amazon S3`, e um novo aplicativo é gera
 
 ### AWS SNS
 
-![AWS SNS Topic](/assets/aws_sns_topic.jpg)
+![AWS SNS Topic](assets/aws_sns_topic.jpg)
 
 Criamos um `tópico` na AWS para cadastro de emails usando a interface gráfica do `website`. Esse tópico é usado para cadastro de e-mail dos clientes registrados no banco de dados e, claro, para enviar a todos eles mensagens pertinentes sobre suas contas.
 
-![AWS SNS Subscribers](/assets/aws_sns_subscribers.jpg)
+![AWS SNS Subscribers](assets/aws_sns_subscribers.jpg)
 
 Na imagem acima podemos ver os e-mails da equipe cadastrados para teste. Implementamos em nossa `API` enpoints tanto para cadastrar quanto para descadastrar e-mails fazendo uso do `SDK` disponibilizado pela `AWS` como uma dependência do `Maven` (veja o arquivo [`pom.xml`](/project/pom.xml)).
 
